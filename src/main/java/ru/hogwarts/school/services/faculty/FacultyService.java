@@ -2,35 +2,31 @@ package ru.hogwarts.school.services.faculty;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.models.Faculty;
-import ru.hogwarts.school.services.FacultyService;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 @Service
-public class FacultyServiceImpl implements FacultyService {
+public class FacultyService {
 
     private final HashMap<Long, Faculty> faculties = new HashMap<>();
     private long UId;
 
-    @Override
     public Collection<Faculty> getAllFaculties() {
         return faculties.values();
     }
 
-    @Override
     public Faculty createFaculty(Faculty faculty) {
         faculty.setId(++UId);
         faculties.put(UId, faculty);
         return faculty;
     }
 
-    @Override
     public Faculty getFacultyById(long id) {
         return faculties.get(id);
     }
 
-    @Override
     public Faculty editFaculty(Faculty faculty) {
         final long facultyId = faculty.getId();
 
@@ -42,8 +38,13 @@ public class FacultyServiceImpl implements FacultyService {
         return null;
     }
 
-    @Override
     public Faculty deleteFacultyById(long id) {
         return faculties.remove(id);
+    }
+
+    public Collection<Faculty> getFacultiesByColor(String color) {
+        return faculties.values().stream()
+                .filter(f -> f.getColor().equals(color))
+                .collect(Collectors.toList());
     }
 }
