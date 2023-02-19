@@ -33,8 +33,8 @@ public class FacultyController {
         return ResponseEntity.ok(foundedFaculty);
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@RequestParam(name = "color") String color) {
+    @GetMapping("filter/{color}")
+    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@PathVariable("color") String color) {
         return ResponseEntity.ok(facultyService.getFacultiesByColor(color));
     }
 

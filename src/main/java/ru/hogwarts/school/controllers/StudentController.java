@@ -33,8 +33,8 @@ public class StudentController {
         return ResponseEntity.ok(foundedStudent);
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam(name = "age") int age) {
+    @GetMapping("filter/{age}")
+    public ResponseEntity<Collection<Student>> getStudentsByAge(@PathVariable("age") int age) {
         return ResponseEntity.ok(studentService.getStudentsByAge(age));
     }
 
