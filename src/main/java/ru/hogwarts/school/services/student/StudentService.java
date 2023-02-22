@@ -5,7 +5,7 @@ import ru.hogwarts.school.models.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -24,12 +24,16 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Student getStudentById(long id) {
-        return studentRepository.findById(id).get();
+    public Optional<Student> getStudentById(long id) {
+        return studentRepository.findById(id);
     }
 
     public Student editStudent(Student student) {
-        return studentRepository.save(student);
+        if (studentRepository.existsById(student.getId())) {
+            return studentRepository.save(student);
+        }
+
+        return null;
     }
 
     public void deleteStudentById(long id) {

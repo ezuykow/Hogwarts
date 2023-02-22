@@ -6,6 +6,7 @@ import ru.hogwarts.school.models.Student;
 import ru.hogwarts.school.services.student.StudentService;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("students")
@@ -24,17 +25,13 @@ public class StudentController {
 
     @GetMapping("{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable("id") long id) {
-        Student foundedStudent = studentService.getStudentById(id);
+        Optional<Student> foundedStudent = studentService.getStudentById(id);
 
-        if (foundedStudent == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(foundedStudent);
+        return foundedStudent.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("filter/{age}")
-    public ResponseEntity<Collection<Student>> getStudentsByAge(@PathVariable("age") int age) {
+    @GetMapping("filter")
+    public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam("age") int age) {
         return ResponseEntity.ok(studentService.getStudentsByAge(age));
     }
 

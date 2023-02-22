@@ -6,6 +6,7 @@ import ru.hogwarts.school.models.Faculty;
 import ru.hogwarts.school.services.faculty.FacultyService;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("faculties")
@@ -24,17 +25,14 @@ public class FacultyController {
 
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFacultyById(@PathVariable("id") long id) {
-        Faculty foundedFaculty = facultyService.getFacultyById(id);
+        Optional<Faculty> foundedFaculty = facultyService.getFacultyById(id);
 
-        if (foundedFaculty == null) {
-            return ResponseEntity.notFound().build();
-        }
+        return foundedFaculty.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
-        return ResponseEntity.ok(foundedFaculty);
     }
 
-    @GetMapping("filter/{color}")
-    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@PathVariable("color") String color) {
+    @GetMapping("filter")
+    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@RequestParam("color") String color) {
         return ResponseEntity.ok(facultyService.getFacultiesByColor(color));
     }
 
