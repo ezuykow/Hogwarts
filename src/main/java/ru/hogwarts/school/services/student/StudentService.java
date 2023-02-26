@@ -28,12 +28,12 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
-    public Student editStudent(Student student) {
+    public Optional<Student> editStudent(Student student) {
         if (studentRepository.existsById(student.getId())) {
-            return studentRepository.save(student);
+            return Optional.of(studentRepository.save(student));
         }
 
-        return null;
+        return Optional.empty();
     }
 
     public void deleteStudentById(long id) {

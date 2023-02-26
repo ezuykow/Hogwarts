@@ -25,9 +25,7 @@ public class FacultyController {
 
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFacultyById(@PathVariable("id") long id) {
-        Optional<Faculty> foundedFaculty = facultyService.getFacultyById(id);
-
-        return foundedFaculty.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.of(facultyService.getFacultyById(id));
 
     }
 
@@ -43,13 +41,7 @@ public class FacultyController {
 
     @PutMapping
     public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
-        Faculty editedFaculty = facultyService.editFaculty(faculty);
-
-        if (editedFaculty == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(editedFaculty);
+        return ResponseEntity.of(facultyService.editFaculty(faculty));
     }
 
     @DeleteMapping("{id}")

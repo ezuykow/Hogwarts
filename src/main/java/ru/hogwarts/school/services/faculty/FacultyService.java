@@ -28,12 +28,12 @@ public class FacultyService {
         return facultyRepository.findById(id);
     }
 
-    public Faculty editFaculty(Faculty faculty) {
+    public Optional<Faculty> editFaculty(Faculty faculty) {
         if (facultyRepository.existsById(faculty.getId())) {
-            return facultyRepository.save(faculty);
+            return Optional.of(facultyRepository.save(faculty));
         }
 
-        return null;
+        return Optional.empty();
 
     }
 

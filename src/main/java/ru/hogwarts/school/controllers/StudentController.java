@@ -25,9 +25,7 @@ public class StudentController {
 
     @GetMapping("{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable("id") long id) {
-        Optional<Student> foundedStudent = studentService.getStudentById(id);
-
-        return foundedStudent.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.of(studentService.getStudentById(id));
     }
 
     @GetMapping("filter")
@@ -42,13 +40,7 @@ public class StudentController {
 
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
-        Student editedStudent = studentService.editStudent(student);
-
-        if (editedStudent == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(editedStudent);
+        return ResponseEntity.of(studentService.editStudent(student));
     }
 
     @DeleteMapping("{id}")
