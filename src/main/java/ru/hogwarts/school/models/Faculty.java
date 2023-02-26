@@ -1,9 +1,14 @@
 package ru.hogwarts.school.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import ru.hogwarts.school.serializer.StudentsJsonSerializer;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Faculty {
@@ -13,6 +18,19 @@ public class Faculty {
     private long id;
     private String name;
     private String color;
+
+
+    @OneToMany(mappedBy = "faculty")
+    @JsonSerialize(using = StudentsJsonSerializer.class)
+    private Set<Student> students;
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 
     public long getId() {
         return id;
