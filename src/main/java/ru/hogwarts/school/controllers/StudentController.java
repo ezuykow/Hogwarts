@@ -3,10 +3,9 @@ package ru.hogwarts.school.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.models.Student;
-import ru.hogwarts.school.services.student.StudentService;
+import ru.hogwarts.school.services.StudentService;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("students")
@@ -19,8 +18,9 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Student>> getAllStudents() {
-        return ResponseEntity.ok(studentService.getAllStudents());
+    public ResponseEntity<Collection<Student>> getAllStudents(@RequestParam(required = false) Integer min,
+                                                              @RequestParam(required = false) Integer max) {
+        return ResponseEntity.ok(studentService.getAllStudents(min, max));
     }
 
     @GetMapping("{id}")
