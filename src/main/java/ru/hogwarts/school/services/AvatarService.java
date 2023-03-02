@@ -60,6 +60,10 @@ public class AvatarService {
         return true;
     }
 
+    public Optional<Avatar> findAvatar(long id) {
+        return avatarRepository.findAvatarByStudentId(id);
+    }
+
     private String getExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
