@@ -67,7 +67,7 @@ public class StudentController {
         return ResponseEntity.status(OK).headers(headers).body(avatar.getData());
     }
 
-    @GetMapping("{id}/avatar-from-file")
+    @GetMapping("{id}/avatar_from_file")
     public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException{
         Optional<Avatar> avatarOptional = avatarService.findAvatar(id);
         if (avatarOptional.isEmpty()) {
