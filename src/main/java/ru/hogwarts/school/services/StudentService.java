@@ -29,6 +29,18 @@ public class StudentService {
         return getStudentById(id).map(Student::getFaculty);
     }
 
+    public Integer getCountOfStudents() {
+        return studentRepository.getCountOfStudents();
+    }
+
+    public Integer getAverageAge() {
+        return studentRepository.getAverageAge();
+    }
+
+    public Optional<Collection<Student>> getLastFiveStudents() {
+        return Optional.of(studentRepository.getLastFiveStudents());
+    }
+
     public Student createStudent(Student student) {
         return studentRepository.save(student);
     }
