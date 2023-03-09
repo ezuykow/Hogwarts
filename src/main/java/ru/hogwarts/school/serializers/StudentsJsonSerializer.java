@@ -1,9 +1,9 @@
-package ru.hogwarts.school.serializer;
+package ru.hogwarts.school.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import ru.hogwarts.school.models.Student;
+import ru.hogwarts.school.entities.Student;
 
 import java.io.IOException;
 import java.util.ArrayList;

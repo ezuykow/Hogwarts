@@ -1,16 +1,14 @@
-package ru.hogwarts.school.models;
+package ru.hogwarts.school.entities;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import ru.hogwarts.school.serializer.StudentsJsonSerializer;
+import ru.hogwarts.school.serializers.StudentsJsonSerializer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "faculties")
 public class Faculty {
 
     @Id

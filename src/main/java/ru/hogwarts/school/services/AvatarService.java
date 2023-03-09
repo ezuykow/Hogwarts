@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.school.models.Avatar;
-import ru.hogwarts.school.models.Student;
+import ru.hogwarts.school.entities.Avatar;
+import ru.hogwarts.school.entities.Student;
 import ru.hogwarts.school.repositories.AvatarRepository;
 
 import java.io.*;

@@ -2,8 +2,8 @@ package ru.hogwarts.school.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.school.models.Faculty;
-import ru.hogwarts.school.models.Student;
+import ru.hogwarts.school.entities.Faculty;
+import ru.hogwarts.school.entities.Student;
 import ru.hogwarts.school.services.FacultyService;
 
 import java.util.Collection;

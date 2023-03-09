@@ -6,9 +6,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.school.models.Avatar;
-import ru.hogwarts.school.models.Faculty;
-import ru.hogwarts.school.models.Student;
+import ru.hogwarts.school.entities.Avatar;
+import ru.hogwarts.school.entities.Faculty;
+import ru.hogwarts.school.entities.Student;
 import ru.hogwarts.school.services.AvatarService;
 import ru.hogwarts.school.services.StudentService;
 

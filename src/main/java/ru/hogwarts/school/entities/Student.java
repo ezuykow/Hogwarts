@@ -1,9 +1,10 @@
-package ru.hogwarts.school.models;
+package ru.hogwarts.school.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "students")
 public class Student {
 
     @Id
