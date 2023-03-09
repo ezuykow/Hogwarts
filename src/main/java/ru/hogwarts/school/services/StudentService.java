@@ -8,6 +8,7 @@ import ru.hogwarts.school.entities.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +50,15 @@ public class StudentService {
     public Optional<Collection<Student>> getLastFiveStudents() {
         logger.info("Invoked method 'getLastFiveStudents'");
         return Optional.of(studentRepository.getLastFiveStudents());
+    }
+
+    public List<String> getStudentsWithFilterByFirstLetter(char letter) {
+        return getAllStudents(null, null).stream()
+                .map(Student::getName)
+                .filter(n -> n.toCharArray()[0] == letter)
+                .map(String::toUpperCase)
+                .sorted()
+                .toList();
     }
 
     public Student createStudent(Student student) {

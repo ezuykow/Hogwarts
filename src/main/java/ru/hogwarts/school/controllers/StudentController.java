@@ -41,17 +41,17 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudents(min, max));
     }
 
-    @GetMapping("/count")
+    @GetMapping("count")
     public ResponseEntity<Integer> getCountOfStudents() {
         return ResponseEntity.ok(studentService.getCountOfStudents());
     }
 
-    @GetMapping("/avg_age")
+    @GetMapping("avg_age")
     public ResponseEntity<Integer> getAverageAge() {
         return ResponseEntity.ok(studentService.getAverageAge());
     }
 
-    @GetMapping("/last")
+    @GetMapping("last")
     public ResponseEntity<Collection<Student>> getLastFiveStudents() {
         return ResponseEntity.of(studentService.getLastFiveStudents());
     }
@@ -99,6 +99,11 @@ public class StudentController {
                 is.transferTo(os);
             }
         }
+    }
+
+    @GetMapping("first_letter")
+    public ResponseEntity<Collection<String>> getStudentsWithFilterByLetter(@RequestParam char letter) {
+        return ResponseEntity.ok(studentService.getStudentsWithFilterByFirstLetter(letter));
     }
 
     @PostMapping
