@@ -20,4 +20,9 @@ public class InfoController {
     public ResponseEntity<Integer> getPort() {
         return ResponseEntity.ok(infoService.getPort());
     }
+
+    @GetMapping("abrakadabra!")
+    public ResponseEntity<Integer> showMagic() {
+        return ResponseEntity.ok(infoService.doMagic());
+    }
 }
