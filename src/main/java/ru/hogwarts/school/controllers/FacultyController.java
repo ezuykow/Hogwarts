@@ -36,6 +36,11 @@ public class FacultyController {
 
     }
 
+    @GetMapping("largest_name")
+    public ResponseEntity<String> getLargestName(){
+        return ResponseEntity.ok(facultyService.getLargestName());
+    }
+
     @PostMapping
     public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
         return ResponseEntity.ok(facultyService.createFaculty(faculty));

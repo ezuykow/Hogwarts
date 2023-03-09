@@ -8,6 +8,7 @@ import ru.hogwarts.school.entities.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,13 @@ public class FacultyService {
     public Optional<Collection<Student>> getFacultyStudents(long id) {
         logger.info("Invoked method 'getFacultyStudents'");
         return getFacultyById(id).map(Faculty::getStudents);
+    }
+
+    public String getLargestName() {
+        return getAllFaculties(null, null).stream()
+                .map(Faculty::getName)
+                .max((Comparator.comparingInt(String::length)))
+                .orElse("");
     }
 
     public Faculty createFaculty(Faculty faculty) {
