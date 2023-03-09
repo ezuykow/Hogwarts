@@ -1,5 +1,7 @@
 package ru.hogwarts.school.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Service
 public class AvatarService {
 
+    private final Logger logger = LoggerFactory.getLogger(StudentService.class);
+
     private final StudentService studentService;
     private final AvatarRepository avatarRepository;
 
@@ -32,11 +36,14 @@ public class AvatarService {
     }
 
     public Optional<Collection<Avatar>> getAvatars(Integer page, Integer size) {
+        logger.info("Invoked method 'getAvatars'");
         PageRequest pr = PageRequest.of(page-1, size);
         return Optional.of(avatarRepository.findAll(pr).getContent());
     }
 
     public boolean uploadStudentAvatar(long studentId, MultipartFile avatarFile) throws IOException {
+        logger.info("Invoked method 'uploadStudentAvatar'");
+
         Optional<Student> studentOptional = studentService.getStudentById(studentId);
 
         if (studentOptional.isEmpty()) {
@@ -68,6 +75,7 @@ public class AvatarService {
     }
 
     public Optional<Avatar> findAvatar(long id) {
+        logger.info("Invoked method 'findAvatar'");
         return avatarRepository.findAvatarByStudentId(id);
     }
 

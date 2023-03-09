@@ -22,6 +22,7 @@ import ru.hogwarts.school.repositories.FacultyRepository;
 import ru.hogwarts.school.repositories.StudentRepository;
 import ru.hogwarts.school.services.AvatarService;
 import ru.hogwarts.school.services.FacultyService;
+import ru.hogwarts.school.services.InfoService;
 import ru.hogwarts.school.services.StudentService;
 
 import java.util.List;
@@ -41,6 +42,8 @@ class StudentControllerTest {
     private AvatarService avatarService;
     @SpyBean
     private FacultyService facultyService;
+    @SpyBean
+    private InfoService infoService;
 
     @MockBean
     private AvatarRepository avatarRepository;
@@ -53,6 +56,8 @@ class StudentControllerTest {
     private StudentController studentController;
     @InjectMocks
     private FacultyController facultyController;
+    @InjectMocks
+    private InfoController infoController;
 
     @Autowired
     private MockMvc mockMvc;
