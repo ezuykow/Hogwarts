@@ -7,9 +7,7 @@ import ru.hogwarts.school.entities.Faculty;
 import ru.hogwarts.school.entities.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -45,6 +43,14 @@ public class StudentService {
     public Integer getAverageAge() {
         logger.info("Invoked method 'getAverageAge'");
         return studentRepository.getAverageAge();
+    }
+
+    public Double getAverageAgeWithStream() {
+        return getAllStudents(null, null).stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0);
+
     }
 
     public Optional<Collection<Student>> getLastFiveStudents() {
