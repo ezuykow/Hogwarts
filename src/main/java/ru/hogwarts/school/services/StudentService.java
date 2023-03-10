@@ -53,6 +53,53 @@ public class StudentService {
 
     }
 
+    public boolean writeNamesToConsole() {
+        List<String> names = getAllStudents(null, null).stream()
+                .map(Student::getName)
+                .toList();
+
+        System.out.println(names.get(0));
+        System.out.println(names.get(1));
+
+        new Thread(() -> {
+            System.out.println(names.get(2));
+            System.out.println(names.get(3));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(names.get(4));
+            System.out.println(names.get(5));
+        }).start();
+
+        return true;
+    }
+
+    public boolean writeNamesToConsoleSync() {
+        List<String> names = getAllStudents(null, null).stream()
+                .map(Student::getName)
+                .toList();
+
+        writeToConsole(names.get(0));
+        writeToConsole(names.get(1));
+
+        new Thread(() -> {
+            writeToConsole(names.get(2));
+            writeToConsole(names.get(3));
+        }).start();
+
+        new Thread(() -> {
+            writeToConsole(names.get(4));
+            writeToConsole(names.get(5));
+        }).start();
+
+        return true;
+
+    }
+
+    private synchronized void writeToConsole(String s) {
+        System.out.println(s);
+    }
+
     public Optional<Collection<Student>> getLastFiveStudents() {
         logger.info("Invoked method 'getLastFiveStudents'");
         return Optional.of(studentRepository.getLastFiveStudents());

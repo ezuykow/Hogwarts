@@ -111,6 +111,16 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudentsWithFilterByFirstLetter(letter));
     }
 
+    @GetMapping("names_to_console")
+    public ResponseEntity<Boolean> writeNamesToConsole() {
+        return ResponseEntity.ok(studentService.writeNamesToConsole());
+    }
+
+    @GetMapping("names_to_console_sync")
+    public ResponseEntity<Boolean> writeNamesToConsoleSync() {
+        return ResponseEntity.ok(studentService.writeNamesToConsoleSync());
+    }
+
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
         return ResponseEntity.ok(studentService.createStudent(student));
