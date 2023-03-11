@@ -54,12 +54,7 @@ public class StudentService {
     }
 
     public boolean writeNamesToConsole() {
-        List<String> names = getAllStudents(null, null).stream()
-                .map(Student::getName)
-                .toList();
-
-        System.out.println(names.get(0));
-        System.out.println(names.get(1));
+        List<String> names = getNamesList();
 
         new Thread(() -> {
             System.out.println(names.get(2));
@@ -71,33 +66,45 @@ public class StudentService {
             System.out.println(names.get(5));
         }).start();
 
+        System.out.println(names.get(0));
+        System.out.println(names.get(1));
+
         return true;
     }
 
+    private int currentIdxToWrite;
     public boolean writeNamesToConsoleSync() {
-        List<String> names = getAllStudents(null, null).stream()
+        List<String> names = getNamesList();
+
+        new Thread(() -> {
+            writeToConsole(names, 0);
+            writeToConsole(names, 1);
+        }).start();
+        new Thread(() -> {
+            writeToConsole(names, 2);
+            writeToConsole(names, 3);
+        }).start();
+        new Thread(() -> {
+            writeToConsole(names, 4);
+            writeToConsole(names, 5);
+        }).start();
+
+        return true;
+    }
+
+    private List<String> getNamesList() {
+        return getAllStudents(null, null).stream()
                 .map(Student::getName)
                 .toList();
-
-        writeToConsole(names.get(0));
-        writeToConsole(names.get(1));
-
-        new Thread(() -> {
-            writeToConsole(names.get(2));
-            writeToConsole(names.get(3));
-        }).start();
-
-        new Thread(() -> {
-            writeToConsole(names.get(4));
-            writeToConsole(names.get(5));
-        }).start();
-
-        return true;
-
     }
 
-    private synchronized void writeToConsole(String s) {
-        System.out.println(s);
+    private synchronized void writeToConsole(List<String> names, int nameIdx) {
+        if (currentIdxToWrite == nameIdx) {
+            System.out.println(names.get(currentIdxToWrite));
+            if (++currentIdxToWrite == 6) {
+                currentIdxToWrite = 0;
+            }
+        }
     }
 
     public Optional<Collection<Student>> getLastFiveStudents() {
